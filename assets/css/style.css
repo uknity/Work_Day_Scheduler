@@ -26,21 +26,37 @@ textarea {
   text-align: center;
 }
 
+.calendarContainer {
+  width: 90%;
+}
 .time-block {
-  text-align: center;
-  border-radius: 15px;
+  text-align: left;
+  color: black;
+  padding: 20px;
 }
 
 .row {
   white-space: pre-wrap;
   height: 80px;
   border-top: 1px solid white;
+  padding-right: 0px;
+  border-top-right-radius: 9px;
+  border-bottom-right-radius: 9px;
+  margin-right: 15px;
+  margin-left: 15px;
 }
 
 .hour {
   background-color: #ffffff;
   color: #000000;
-  border-top: 1px dashed #000000;
+  border-top: 2px dashed #000000;
+  border-right: 2px dashed #000000;
+}
+
+.icon {
+  display: flex;
+  width: 40px;
+  height: auto;
 }
 
 .past {
@@ -60,10 +76,16 @@ textarea {
 
 .saveBtn {
   border-left: 1px solid black;
-  border-top-right-radius: 15px;
-  border-bottom-right-radius: 15px;
+  border-top-right-radius: 9px;
+  border-bottom-right-radius: 9px;
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px;
   background-color: #06aed5;
   color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
 }
 
 .saveBtn i:hover {
