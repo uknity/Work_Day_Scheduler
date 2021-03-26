@@ -1,12 +1,10 @@
 //Dom variables
 var currentDayEl = $("#currentDay");
 var calendarContainerEl = $(".calendarContainer");
-// var rowEl = $(".row");
 var timeEl = $(".time");
-var nowHour = moment().format("hh-mm-ss");
-var nineam = $("#9am");
+var nowHour = moment().format("HH:mm a");
 
-// var setTime = object[i]("")
+//creates the rows for the planner
 function createRow() {
     for (i=0; i < 9; i++) {
         var row =$("<div>");
@@ -18,6 +16,8 @@ function createRow() {
         
         var timeCol = $("<div>");
         timeCol.addClass("col-12 col-md-2 hour");
+        timeColId = "row" + [i];
+        timeCol.attr('id', timeColId);
         row.append(timeCol);
 
         var textArea = $("<textarea>");
@@ -29,111 +29,79 @@ function createRow() {
         saveId = [i];
         save.attr('hour', saveId);
         save.append("<img id='saveImg' class='icon' src='assets/images/save icon2.png'/>");
-        row.append(save);              
+        row.append(save); 
+
+        var timeSpan = $("<span>");
+        timeCol.append(timeSpan);
+        var indexHour = parseInt([i]) + parseInt(9);
+        console.log(indexHour);
+        var block = moment(indexHour, "HH").format("h:mm a");
+        console.log(block);
+        // var timeText = block.valueOf();
+        // console.log(timeText);
+        timeCol.append(block);
+
     };
 }
 
-createRow();
 
-
-// function createRow() {
-//     var row[index] =$("<div>");
-//     row.attr("class, "row");
-//     row.attr("class, "time-block")
-//     calendarContainerEl.append(row)
-// }
-
+//checks the time every second
 function checkTime() {
     setInterval(function() {
         console.log(nowHour);
     }, 1000);
 }
 
-console.log(nowHour);
-
-function displayTime() {
-    var rightNow = moment().format('MMM DD, YYYY');
-    currentDayEl.text(rightNow);
+//displays the current date in the header
+function displayDate() {
+    var currentDate = moment().format('MMM DD, YYYY');
+    currentDayEl.text(currentDate);
 }
 
-setInterval(displayTime, 1000);
+//sets the current date for the header
+setInterval(displayDate, 1000);
 
+//calls checkTime function
 checkTime();
 
-$(".saveBtn").on("click", function () {
-    var hour = $(this).attr("hour");
-    console.log(hour);
+//calls the function to create the rows in the planner
+createRow();
 
-    //set the appointment var to the value to the hour.value so that it can be stored as a value
-    var appointment = document.getElementById(hour).value;
-    console.log(appointment);
-    //puts the key(hour) and its value(event) into local storage
-    localStorage.setItem("hour", hour);
-    localStorage.setItem("appointment", appointment);
+// $(".saveBtn").on("click", function () {
+//     var hour = $(this).attr("hour");
+//     console.log(hour);
 
-})
+//     //set the appointment var to the value to the hour.value so that it can be stored as a value
+//     var appointment = document.getElementById(hour).value;
+//     console.log(appointment);
+//     //puts the key(hour) and its value(event) into local storage
+//     localStorage.setItem("hour", hour);
+//     localStorage.setItem("appointment", appointment);
 
-getAppointments();
+// })
 
-function getAppointments() {
-var hour = localStorage.getItem("hour");
-var appointment = localStorage.getItem("appointment");
-console.log(hour);
-console.log(appointment);
+// getAppointments();
+
+// function getAppointments() {
+// var hour = localStorage.getItem("hour");
+// var appointment = localStorage.getItem("appointment");
+// console.log(hour);
+// console.log(appointment);
 
 // if (!hour || !appointment) {
 //     return;
 // }
-}
-
-
-
-
-
-
-
-
-// alkj;dkls = [
-//     {time: "9AM",
-//     moment: "9"}
-// ]
-//when creating a for loop, have an array of objects that correspond with the index of the for loop
-
-// var object[i]
-
-
-// nineam = moment().set("hour", 9, "minute", 00);
-// console.log(nineam);
-
-
-// function colorRow() {
-
-//     for (i=)
-// }
-//callback functions
-
-
-    //when user clicks save, var hour is created with the attribute for that hour
-
-
-//    for (i=0; i<9; i++) {
-
-
-
-// if (hour == "eleven") {
-//     $("#eleven").textContent = appointment;
 // }
 
-// $("#eleven").textContent = "hello";
-// console.log(appointment);
-// console.log($("#eleven"));
-// document.querySelector("#11").textContent = appointment;
-// document.querySelector("#hour").textContent = appointment;
-
-// document.getElementById(' hour ').textContent = appointment;
 
 
-// $("hourId").text() = appointment;
+
+
+
+
+
+
+
 
 
 

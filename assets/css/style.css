@@ -51,6 +51,10 @@ textarea {
   color: #000000;
   border-top: 2px dashed #000000;
   border-right: 2px dashed #000000;
+  text-align: right;
+  font-size: 1.4em;
+  padding: 10px;
+  font-weight: bold;
 }
 
 .icon {
@@ -93,6 +97,3 @@ textarea {
   transition: all 0.3s ease-in-out;
 }
 
-.row0 {
-  background-color: red;
-}
