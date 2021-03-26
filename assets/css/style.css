@@ -92,3 +92,7 @@ textarea {
   font-size: 20px;
   transition: all 0.3s ease-in-out;
 }
+
+.row0 {
+  background-color: red;
+}

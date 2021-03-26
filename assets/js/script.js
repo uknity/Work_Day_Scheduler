@@ -1,45 +1,36 @@
 //Dom variables
 var currentDayEl = $("#currentDay");
 var calendarContainerEl = $(".calendarContainer");
-var rowEl = $(".row");
+// var rowEl = $(".row");
 var timeEl = $(".time");
 var nowHour = moment().format("hh-mm-ss");
 var nineam = $("#9am");
 
 // var setTime = object[i]("")
 function createRow() {
-    for (i=0; i < 2; i++) {
-    // var index = [i];
-    
-        var index = [i];
+    for (i=0; i < 9; i++) {
         var row =$("<div>");
         row.addClass("row time-block");
-        row.addClass("[i]");
-        // row.attr('class, 'row'');
-        // row.attr("class, "time-block");
-        // row.attr("id, "row[i]"");
-        
+        rowClass = "row" + [i];
+        console.log(rowClass);
+        row.addClass(rowClass);
         calendarContainerEl.append(row);
+        
         var timeCol = $("<div>");
-        timeCol.addClass("col-12 col-md-2 hour [i]");
+        timeCol.addClass("col-12 col-md-2 hour");
         row.append(timeCol);
 
         var textArea = $("<textarea>");
-        textArea.addClass("col-12 col-md-9 [i]");
+        textArea.addClass("col-12 col-md-9");
         row.append(textArea);
-        i++;
-
-        var save = $("<btn>");
-        save.addClass("btn saveBtn col-12 col-md-1 [i]")
-        save.addClass("hour[i]");
-        row.append(save);
-
-        // var saveImg = $('<img src="assets/images/save icon2.png">');
-        // saveImg.addClass=("icon");
-        save.append("<img id='saveImg' class='icon' src='assets/images/save icon2.png'/>");
         
+        var save = $("<btn>");
+        save.addClass("btn saveBtn col-12 col-md-1")
+        saveId = [i];
+        save.attr('hour', saveId);
+        save.append("<img id='saveImg' class='icon' src='assets/images/save icon2.png'/>");
+        row.append(save);              
     };
-
 }
 
 createRow();
