@@ -35,21 +35,19 @@ function createRow() {
         var indexHour = parseInt([i]) + parseInt(9);
         var block = moment(indexHour, "H").format("HH:mm a");
         timeCol.append(block);
-            if (block < nowHour) {
+        var blockHour = moment(indexHour, "H").format("HH");
+        console.log(blockHour);
+        var nowHourSpan = moment().format("HH");
+        console.log(nowHourSpan);
+            if (blockHour < nowHourSpan) {
                 row.addClass("past");
-            } else if (block = nowHour){
-                row.addClass("present");
-            } else {
+            } else  if (blockHour > nowHourSpan) {
                 row.addClass("future");
+            } else {
+                row.addClass("present");
             }
-        
     };
 }
-// ("h:mm a");
-// function rowColors() {
-    
-//     (if block)
-// }
 
 //checks the time every second
 function checkTime() {
@@ -86,21 +84,29 @@ createRow();
         localStorage.setItem("hour", hour);
         localStorage.setItem("appointment", appt);
     })
-    
+ 
+
 function getAppointments() {
 var hour = localStorage.getItem("hour");
 var appointment = localStorage.getItem("appointment");
 console.log(hour);
 console.log(appointment);
+console.log(typeof hour);
+console.log(typeof appointment);
 
 if (!hour || !appointment) {
     return;
 } else {
-    $(".startBtn").attr("hour", hour) = hour;
-    $('#' + hour) = appointment;
-    
-}
-}
+        var textAreaId = $("#" + hour);
+        console.log(textAreaId);
+        textAreaId.innerHtml = appointment;   
+        }
+    }
 
 
-getAppointments();
+
+function init() {
+    getAppointments();
+}
+
+init();
