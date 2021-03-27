@@ -5,14 +5,13 @@ var nowHour = moment().format("HH:mm a");
 
 //creates the rows for the planner
 function createRow() {
-    for (i=0; i < 9; i++) {
-        var row =$("<div>");
+    for (i = 0; i < 9; i++) {
+        var row = $("<div>");
         row.addClass("row time-block");
         rowClass = "row" + [i];
-        console.log(rowClass);
         row.addClass(rowClass);
         calendarContainerEl.append(row);
-        
+
         var timeCol = $("<div>");
         timeCol.addClass("col-12 col-md-2 hour");
         timeColId = "row" + [i];
@@ -24,34 +23,32 @@ function createRow() {
         textAreaId = [i];
         textArea.attr('id', textAreaId);
         row.append(textArea);
-        
+
         var save = $("<btn>");
         save.addClass("btn saveBtn col-12 col-md-1")
         saveId = [i];
         save.attr('hour', saveId);
         save.append("<img id='saveImg' class='icon' src='assets/images/save icon2.png'/>");
-        row.append(save); 
+        row.append(save);
 
         var indexHour = parseInt([i]) + parseInt(9);
         var block = moment(indexHour, "H").format("HH:mm a");
         timeCol.append(block);
         var blockHour = moment(indexHour, "H").format("HH");
-        console.log(blockHour);
         var nowHourSpan = moment().format("HH");
-        console.log(nowHourSpan);
-            if (blockHour < nowHourSpan) {
-                row.addClass("past");
-            } else  if (blockHour > nowHourSpan) {
-                row.addClass("future");
-            } else {
-                row.addClass("present");
-            }
+        if (blockHour < nowHourSpan) {
+            row.addClass("past");
+        } else if (blockHour > nowHourSpan) {
+            row.addClass("future");
+        } else {
+            row.addClass("present");
+        }
     };
 }
 
 //checks the time every second
 function checkTime() {
-    setInterval(function() {
+    setInterval(function () {
         console.log(nowHour);
     }, 1000);
 }
@@ -72,41 +69,71 @@ checkTime();
 createRow();
 
 // $(document).ready(function() {
-    $(".saveBtn").click(function(){
-        var hour = $(this).attr('hour');
+$(".saveBtn").click(function (event) {
+    event.preventDefault();
+    var hour = $(this).attr('hour');
+    console.log(hour);
+    var appointment = $('#' + hour);
+    console.log(appointment);
+    var appt = appointment.val();
+    console.log(appt);
+    
+    saveAppointment();
+    renderAppointments();
+          
+})
+
+function saveAppointment() {
+    
+    localStorage.setItem("hour", hour);
+    localStorage.setItem("appointment", appt)
+}
+
+function renderAppointments() {
+    var hourR = localStorage.getItem("hour");
+    var appointmentR = localStorage.getItem("appointment");
+    var b = hourR;
+    console.log(b);
+    // var array = JSON.parse(localStorage.getItem("appointments"));
+    // console.log(array);
+    if (b !== null) {
+        
+        document.getElementById(b).innerHTML = appointment;
         console.log(hour);
-        var appointment = $('#' + hour);
         console.log(appointment);
-        var appt = appointment.val();
-        console.log(appt);
-               
-        //puts the key(hour) and its value(event) into local storage
-        localStorage.setItem("hour", hour);
-        localStorage.setItem("appointment", appt);
-    })
- 
-
-function getAppointments() {
-var hour = localStorage.getItem("hour");
-var appointment = localStorage.getItem("appointment");
-console.log(hour);
-console.log(appointment);
-console.log(typeof hour);
-console.log(typeof appointment);
-
-if (!hour || !appointment) {
-    return;
-} else {
-        var textAreaId = $("#" + hour);
-        console.log(textAreaId);
-        textAreaId.innerHtml = appointment;   
-        }
+        console.log(typeof hour);
+        console.log(typeof appointment);
+        
+    } else {
+        return;
     }
-
-
+    
+    
+    
+      
+}
+    
 
 function init() {
-    getAppointments();
+    renderAppointments();
 }
 
 init();
+
+
+//puts the key(hour) and its value(event) into local storage
+
+// localStorage.setItem("hour", hour);
+// localStorage.setItem("appointment", appt);
+
+// var appointment = $('#' + hour);
+//     console.log(appointment);
+//     var appt = appointment.val();
+//     console.log(appt);
+//     var getAppt = 
+//     var hour = localStorage.getItem("appointments", JSON.parse());
+// var appointment = localStorage.getItem("appointment");
+// console.log(hour);
+// console.log(appointment);
+// console.log(typeof hour);
+// console.log(typeof appointment)
