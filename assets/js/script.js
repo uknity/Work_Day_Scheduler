@@ -3,6 +3,7 @@ var currentDayEl = $("#currentDay");
 var calendarContainerEl = $(".calendarContainer");
 var nowHour = moment().format("HH:mm a");
 
+//creates the array of scheduled times and events
 var plannerFeatures = [
   {
     scheduledTime: "",
@@ -48,24 +49,25 @@ var index = 0;
 function createRow() {
   calendarContainerEl.empty();
 
+  //uses a for loop to populate the calendar container
   for (i = 0; i < 9; i++) {
     var row = $("<div>").addClass("row time-block");
     calendarContainerEl.append(row);
-
+    //scheduled times
     var timeCol = $("<div>");
     timeCol.addClass("col-12 col-md-2 hour");
     timeColId = "row" + [i];
     timeCol.attr("id", timeColId);
     row.append(timeCol);
-
+    //text area to enter appointments
     var appointmentDiv = $("<textArea>");
     appointmentDiv.addClass("col-12 col-md-9");
     appointmentId = [i];
     appointmentDiv.attr("id", appointmentId);
     appointmentDiv.val(plannerFeatures[i].event);
     row.append(appointmentDiv);
-
-    var saveBtn = $("<btn>");
+    //save button to save appointments
+    var saveBtn = $("<button>");
     saveBtn.addClass("btn saveBtn col-12 col-md-1");
     dataIndex = [i];
     saveBtn.attr("data-index", dataIndex);
@@ -73,7 +75,7 @@ function createRow() {
       "<img id='saveImg' class='icon' src='assets/images/save icon2.png'/>"
     );
     row.append(saveBtn);
-
+    //populates the scheduled time column and formats colored rows
     var indexHour = index + 9;
     var blockHour = moment(indexHour, "H").format("hh:mm a");
     console.log(blockHour);
@@ -90,7 +92,7 @@ function createRow() {
     index++;
   }
 }
-
+//initial function
 function init() {
   var itemsFromLocalStorage = JSON.parse(
     localStorage.getItem("plannerFeatures")
@@ -100,40 +102,6 @@ function init() {
   }
   createRow();
 }
-
-$(".saveBtn").on("click", function (event) {
-  event.preventDefault;
-  alert("clicked");
-  console.log($(this).attr("data-index"));
-  var clickedIndex = $(this).attr("data-index");
-  var appointmentId = $("#" + clickedIndex);
-  console.log(appointmentId);
-  var appt = appointmentId.val();
-  var eventString = plannerFeatures[clickedIndex].event;
-  eventString.concat(appt);
-  console.log(eventString);
-  localStorage.setItem("plannerFeatures", JSON.stringify(plannerFeatures));
-  createRow();
-});
-
-function renderAppointments() {
-  var array = JSON.parse(localStorage.getItem("plannerFeatures"));
-  var scheduledTime = array.scheduledTime;
-  var eventR = array.appointment;
-  var b = eventR;
-  console.log(b);
-  if (b !== null) {
-    document.getElementById(b).innerHTML = appointmentR;
-    console.log(hourR);
-    console.log(appointmentR);
-    console.log(typeof hourR);
-    console.log(typeof appointmentR);
-  } else {
-    return;
-  }
-}
-
-init();
 
 //checks the time every second
 function checkTime() {
@@ -148,45 +116,27 @@ function displayDate() {
   currentDayEl.text(currentDate);
 }
 
+//save button event listener function
+$(".saveBtn").on("click", function(event) {
+    event.preventDefault;
+    alert("clicked");
+    console.log($(this).attr("data-index"));
+    var clickedIndex = $(this).attr("data-index");
+    var appointmentId = $("#" + clickedIndex);
+    console.log(appointmentId);
+    var appt = appointmentId.val();
+    var eventString = plannerFeatures[clickedIndex].event;
+    eventString.concat(appt);
+    console.log(eventString);
+    localStorage.setItem("plannerFeatures", JSON.stringify(plannerFeatures));
+    createRow();
+  });
+
 //sets the current date for the header
 setInterval(displayDate, 1000);
 
 //calls checkTime function
 checkTime();
 
-// $(document).ready(function() {
-// $(".saveBtn").click(function (event) {
-//     event.preventDefault();
-//     var hour = $(this).attr('hour');
-//     console.log(hour);
-//     var appointment = $('#' + hour);
-//     console.log(appointment);
-//     var appt = appointment.val();
-//     var array = {
-//         hour: hour,
-//         appointment: appt
-//     }
-//     console.log(array);
-//     localStorage.setItem("array", JSON.stringify(array));
-//     // localStorage.set("hour", hour);
-//     // localStorage.set("appointment", appt)
+init();
 
-//     renderAppointments();
-// })
-
-//puts the key(hour) and its value(event) into local storage
-
-// localStorage.setItem("hour", hour);
-// localStorage.setItem("appointment", appt);
-
-// var appointment = $('#' + hour);
-//     console.log(appointment);
-//     var appt = appointment.val();
-//     console.log(appt);
-//     var getAppt =
-//     var hour = localStorage.getItem("appointments", JSON.parse());
-// var appointment = localStorage.getItem("appointment");
-// console.log(hour);
-// console.log(appointment);
-// console.log(typeof hour);
-// console.log(typeof appointment)
