@@ -75,12 +75,13 @@ function createRow() {
       "<img id='saveImg' class='icon' src='assets/images/save icon2.png'/>"
     );
     row.append(saveBtn);
+
     //populates the scheduled time column and formats colored rows
     var indexHour = index + 9;
-    var blockHour = moment(indexHour, "H").format("hh:mm a");
-    console.log(blockHour);
-    timeCol.append(blockHour);
-    var nowHourSpan = moment().format("HH");
+    var blockHour = moment(indexHour, "H").format("HH:mm");
+    var nowHourSpan = moment().format("HH:mm");
+    var blockHourDisplay = moment(indexHour, "H").format("hh:mm a");
+    timeCol.append(blockHourDisplay);
 
     if (blockHour < nowHourSpan) {
       row.addClass("past");
