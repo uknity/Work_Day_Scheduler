@@ -1,54 +1,55 @@
+
+
 //Dom variables
 var currentDayEl = $("#currentDay");
 var calendarContainerEl = $(".calendarContainer");
 var nowHour = moment().format("HH:mm a");
 
-
 var plannerFeatures = [
     {
-      scheduledTime: moment(9, "H").format("hh mm a"),
-      event: "good morning",
+      scheduledTime:  moment(9, "H").format("hh:mm a"),
+      event: "Eat breakfast...just kidding.  Study.",
     },
     {
-      scheduledTime: moment(10, "H").format("hh mm a"),
-      event: "",
+      scheduledTime:  moment(10, "H").format("hh:mm a"),
+      event: "Kiss Myrtle.  Keep studying.",
     },
     {
-      scheduledTime: moment(11, "H").format("hh mm a"),
-      event: "",
+      scheduledTime:  moment(11, "H").format("hh:mm a"),
+      event: "Study study study.",
     },
     {
-      scheduledTime: moment(12, "H").format("hh mm a"),
-      event: "",
+      scheduledTime:  moment(12, "H").format("hh:mm a"),
+      event: "Study some more",
     },
     {
-      scheduledTime: moment(13, "H").format("hh mm a"),
-      event: "",
+      scheduledTime:  moment(13, "H").format("hh:mm a"),
+      event: "Study even more",
     },
     {
-      scheduledTime: moment(14, "H").format("hh mm a"),
-      event: "",
+      scheduledTime:  moment(14, "H").format("hh:mm a"),
+      event: "Yell at my computer.",
     },
     {
-      scheduledTime: moment(15, "H").format("hh mm a"),
-      event: "",
+      scheduledTime:  moment(15, "H").format("hh:mm a"),
+      event: "Get mad at my computer.",
     },
     {
-      scheduledTime: moment(16, "H").format("hh mm a"),
-      event: "",
+      scheduledTime:  moment(16, "H").format("hh mm a"),
+      event: "Feel dumb.",
     },
     {
-      scheduledTime: moment(17, "H").format("hh mm a"),
-      event: "",
+      scheduledTime:  moment(17, "H").format("hh:mm a"),
+      event: "Keep studying.",
     },
   ];
 
-console.log(plannerFeatures[0].scheduledTime);
+
 
 var index = 0;
 //creates the rows for the planner
 function createRow() {
-  calendarContainerEl.empty();
+//   calendarContainerEl.empty();
 
   //uses a for loop to populate the calendar container
   for (i = 0; i < 9; i++) {
@@ -57,11 +58,10 @@ function createRow() {
         
     //scheduled times
     var timeCol = $('<div>').addClass('col-12 col-md-2 hour');
-    console.log(plannerFeatures[i].scheduledTime);
-    console.log(typeof plannerFeatures[i].scheduledTime);
     timeCol.append($("<span>").text(plannerFeatures[i].scheduledTime));
     row.append(timeCol);
 
+    
     //text area to enter appointments
     var appointmentDiv = $("<textArea>");
     appointmentDiv.addClass("col-12 col-md-9");
@@ -84,6 +84,7 @@ function createRow() {
     var indexHour = index + 9;
     var blockHour = moment(indexHour, "H").format("HH");
     var nowHourSpan = moment().format("HH");
+       
     
     if (blockHour < nowHourSpan) {
       row.addClass("past");
@@ -126,8 +127,6 @@ calendarContainerEl.on("click", ".saveBtn", function() {
     alert("your button is working");
     var clickedIndex = $(this).attr("data-index");
     console.log(clickedIndex);
-    var appointmentId = $("#" + clickedIndex);
-    console.log(appointmentId);
     var appt = appointmentId.val();
     console.log(appt);
     var eventString = plannerFeatures[clickedIndex].event;

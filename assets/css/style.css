@@ -34,10 +34,14 @@ textarea {
   color: black;
   padding: 20px;
 }
+.timeDivFormat {
+  color: black;
+  font-size: 1em;
+}
 
 .row {
   white-space: pre-wrap;
-  height: 80px;
+  height: 110px;
   border-top: 1px solid white;
   padding-right: 0px;
   border-top-right-radius: 9px;
