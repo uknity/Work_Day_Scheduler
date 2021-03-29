@@ -49,7 +49,7 @@ var plannerFeatures = [
 var index = 0;
 //creates the rows for the planner
 function createRow() {
-//   calendarContainerEl.empty();
+  calendarContainerEl.empty();
 
   //uses a for loop to populate the calendar container
   for (i = 0; i < 9; i++) {
@@ -65,16 +65,17 @@ function createRow() {
     //text area to enter appointments
     var appointmentDiv = $("<textArea>");
     appointmentDiv.addClass("col-12 col-md-9");
-    appointmentId = [i];
-    appointmentDiv.attr("id", appointmentId);
+    appointmentId = i;
+    appointmentDiv.attr("id", "'appointment"+i);
     appointmentDiv.val(plannerFeatures[i].event);
     row.append(appointmentDiv);
     
     //save button to save appointments
     var saveButton = $("<button>");
     saveButton.addClass("btn saveBtn col-12 col-md-1");
-    dataIndex = [i];
-    saveButton.attr("data-index", dataIndex);
+    // dataIndex = [i];
+    // saveButton.attr("data-index", dataIndex);
+    saveButton.attr("data-index", i);
     saveButton.append(
       "<img id='saveImg' class='icon' src='assets/images/save icon2.png'/>"
     );
@@ -124,17 +125,15 @@ function displayDate() {
 
 //click event to collect appointment text and save to local storage
 calendarContainerEl.on("click", ".saveBtn", function() {
-    alert("your button is working");
     var clickedIndex = $(this).attr("data-index");
     console.log(clickedIndex);
-    var appt = appointmentId.val();
+    var appt = $('#appointment-' + clickedIndex).val();
     console.log(appt);
-    var eventString = plannerFeatures[clickedIndex].event;
-    eventString.concat(appt);
-    console.log(eventString);
+    plannerFeatures[clickedIndex].event = appt;
     localStorage.setItem("plannerFeatures", JSON.stringify(plannerFeatures));
-    createRow();  
-})
+    createRow();
+});
+    
 
 //sets the current date for the header
 setInterval(displayDate, 1000);
